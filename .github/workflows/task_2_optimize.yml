@@ -4,15 +4,16 @@ concurrency:
   cancel-in-progress: true
   group: roger
 
+defaults:
+  run:
+    working-directory: ./example-app
+
 on: [push]
 
 jobs:
   job1:
     name: Task 1 - Setup
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./example-app
     steps:
       - uses: actions/setup-node@v3
         with:
@@ -22,9 +23,6 @@ jobs:
   npm:
     name: Npm
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./example-app
     steps:
       - uses: actions/setup-node@v3
         with:
@@ -32,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Test
-        run: npm test
+        run: npm install && npm test
   lint:
     name: Lint
     runs-on: ubuntu-latest
