@@ -1,0 +1,22 @@
+name: Task 2 - Optimizing the workflow
+
+on: [push]
+
+jobs:
+  job1:
+    name: Task 1 - Fix the broken workflow
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./example-app
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: npm install
+      - run: npm run lint
+      - run: npx playwright install
+      - run: npm test
+      - run: npm run build
