@@ -4,6 +4,10 @@ concurrency:
   cancel-in-progress: true
   group: roger
 
+defaults:
+  run:
+    working-directory: ./example-app
+
 on: [push]
 
 jobs:
