@@ -4,10 +4,6 @@ concurrency:
   cancel-in-progress: true
   group: roger
 
-defaults:
-  run:
-    working-directory: ./example-app
-
 on: [push]
 
 jobs:
@@ -26,6 +22,9 @@ jobs:
   npm:
     name: Npm
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./example-app
     steps:
       - uses: actions/checkout@v3
       - uses: bahmutov/npm-install@v1
