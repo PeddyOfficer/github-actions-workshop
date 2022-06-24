@@ -20,47 +20,41 @@ jobs:
           node-version: 16
       - name: Checkout
         uses: actions/checkout@v3
-  npm:
-    name: Npm
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Test
-        run: npm install && npm test
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v3
-      - uses: bahmutov/npm-install@v1
-      - name: Test
-        run: npm run lint
+      - name: Lint
+        run: npm install && npm run lint
   playwright:
     name: Playwright
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: bahmutov/npm-install@v1
-      - name: Test
+      - name: Playwright
         run: npx playwright install
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - uses: actions/checkout@v3
-      - uses: bahmutov/npm-install@v1
       - name: Test
-        run: npm test
+        run: npm install && npm test
   run:
     name: Run
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - uses: actions/checkout@v3
-      - uses: bahmutov/npm-install@v1
       - name: Run
-        run: npm run build
+        run: npm install && npm run build
 
