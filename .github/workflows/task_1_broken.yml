@@ -1,5 +1,7 @@
 name: Task 1 - Fix the broken workflow
 
+on: [push]
+
 jobs:
   task1:
     name: Task 1 - Fix the broken workflow
