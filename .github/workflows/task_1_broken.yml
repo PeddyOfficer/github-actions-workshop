@@ -3,12 +3,12 @@ name: Task 1 - Fix the broken workflow
 on: [push]
 
 jobs:
-  task1:
+  job1:
     name: Task 1 - Fix the broken workflow
     runs-on: ubuntu-latest
     steps:
       - name: Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Checkout
