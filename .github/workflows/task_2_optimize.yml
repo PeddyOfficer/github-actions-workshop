@@ -1,10 +1,14 @@
 name: Task 2 - Optimizing the workflow
 
+concurrency:
+  cancel-in-progress: true
+  group: roger
+
 on: [push]
 
 jobs:
   job1:
-    name: Task 1 - Fix the broken workflow
+    name: Task 1 - Setup
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,3 +24,44 @@ jobs:
       - run: npx playwright install
       - run: npm test
       - run: npm run build
+  npm:
+    name: Npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - name: Test
+        run: npm test
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - name: Test
+        run: npm run lint
+  playwright:
+    name: Playwright
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - name: Test
+        run: npx playwright install
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - name: Test
+        run: npm test
+  run:
+    name: Run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - name: Run
+        run: npm run build
+      
